@@ -1,0 +1,8 @@
+README.md
+command_line.md
+deep_learning_software.md
+editor.md
+example.txt
+example.txty
+exercise_files
+package_manager.md
