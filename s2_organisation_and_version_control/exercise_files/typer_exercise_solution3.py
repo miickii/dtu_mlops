@@ -1,5 +1,5 @@
 import pickle
-from typing import Annotated
+from typing import Annotated, Callable, Optional, Tuple, Union, List  # you will need all of them in your code
 
 import typer
 from sklearn.datasets import load_breast_cancer

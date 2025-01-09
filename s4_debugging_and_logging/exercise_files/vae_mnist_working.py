@@ -10,6 +10,7 @@ from torch.optim import Adam
 from torch.utils.data import DataLoader
 from torchvision.datasets import MNIST
 from torchvision.utils import save_image
+from torch.utils.data import TensorDataset
 
 # Model Hyperparameters
 dataset_path = "datasets"
@@ -24,10 +25,13 @@ epochs = 5
 
 
 # Data loading
-mnist_transform = transforms.Compose([transforms.ToTensor()])
+# Load raw MNIST dataset
+raw_train_dataset = MNIST(dataset_path, train=True, download=True)
+raw_test_dataset = MNIST(dataset_path, train=False, download=True)
 
-train_dataset = MNIST(dataset_path, transform=mnist_transform, train=True, download=True)
-test_dataset = MNIST(dataset_path, transform=mnist_transform, train=False, download=True)
+# Create TensorDataset using the raw data and labels
+train_dataset = TensorDataset(raw_train_dataset.data.float() / 255, raw_train_dataset.targets)
+test_dataset = TensorDataset(raw_test_dataset.data.float() / 255, raw_test_dataset.targets)
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
